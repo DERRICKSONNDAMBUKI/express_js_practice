@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json HTML</title>
+</head>
+
+<body>
+    <h2>Store and retrieve ata from html local storage.</h2>
+    <p id="demo"></p>
+    <script>
+        var myObj, myJSON, text, obj;
+        // storing data
+        myObj = {
+            "name": "Ricky",
+            "age": 31,
+            "city": "Nakuru"
+        };
+        myJSON = JSON.stringify(myObj)
+        localStorage.setItem("testJson", myJSON)
+        // retrieving data:
+        text = localStorage.getItem("testJson");
+        obj = JSON.parse(text);
+        document.getElementById("demo").innerHTML = "Name:" + obj.name + "<br>City:" + obj.city
+    </script>
+    <hr margin="30px">
+    <p id="demo1"></p>
+    <!-- Get data as json from server -->
+    <script>
+        // var xmlhttp = new XMLHttpRequest()
+        // xmlhttp.onreadystatechange = function() {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         myObj = JSON.parse(this.responseText)
+        //         document.getElementById("demo1").innerHTML = myObj
+        //     }
+        // }
+        // xmlhttp.open("GET", "user.txt", true) //use POST to send data
+        // // xmlhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded") //or applicatio/json
+        // // var dbParam = JSON.stringify(obj)
+        // // xmlhttp.send("x=" + dbParam) //or just dbParam
+        // xmlhttp.send()
+        getText("user.txt")
+        async function getText(file) {
+            let x = await fetch(file)
+            let y = await x.text()
+        }
+        document.getElementById("demo1").innerHTML = y
+    </script>
+</body>
+
+</html>
